@@ -1,11 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
-
-function App() {
-  return <div>Hello!</div>;
-}
+import { StoreProvider } from './store';
+import App from './components/App';
 
 render(
-  <App />,
+  <StoreProvider><App /></StoreProvider>,
   document.getElementById('app'),
 );
