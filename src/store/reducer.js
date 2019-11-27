@@ -1,48 +1,5 @@
 import { SONGS } from './actionTypes';
 
-const defaultData = [
-  {
-    id: 1,
-    name: "Name 1",
-    artist_name: "Bob the Blob2",
-    duration: 31,
-    cover_image_path: "https://mm.aiircdn.com/5/243586.jpg",
-    music_file_path: "https://mmj-staging.s3-accelerate.amazonaws.com/assets/music_file/d0e2ac05-d3c3-11e9-8f2a-022ed69f96e6.m4a?cb=20190910140918",
-  },
-  {
-    id: 2,
-    name: "Name 2",
-    artist_name: "Bob the Blob2",
-    duration: 31,
-    cover_image_path: "https://mm.aiircdn.com/5/243586.jpg",
-    music_file_path: "http://www.samisite.com/sound/cropShadesofGrayMonkees.mp3",
-  },
-  {
-    id: 3,
-    name: "Name 3",
-    artist_name: "Bob the Blob2",
-    duration: 31,
-    cover_image_path: "https://mm.aiircdn.com/5/243586.jpg",
-    music_file_path: "https://mmj-staging.s3-accelerate.amazonaws.com/assets/music_file/d0e2ac05-d3c3-11e9-8f2a-022ed69f96e6.m4a?cb=20190910140918",
-  },
-  {
-    id: 5,
-    name: "Name 4",
-    artist_name: "Bob the Blob2",
-    duration: 31,
-    cover_image_path: "https://mm.aiircdn.com/5/243586.jpg",
-    music_file_path: "http://www.samisite.com/sound/cropShadesofGrayMonkees.mp3",
-  },
-  {
-    id: 10,
-    name: "Name 5",
-    artist_name: "Bob the Blob2",
-    duration: 31,
-    cover_image_path: "https://mm.aiircdn.com/5/243586.jpg",
-    music_file_path: "https://mmj-staging.s3-accelerate.amazonaws.com/assets/music_file/d0e2ac05-d3c3-11e9-8f2a-022ed69f96e6.m4a?cb=20190910140918",
-  },
-];
-
 export const initialState = {
   songs: [],
   songsFeching: false,
