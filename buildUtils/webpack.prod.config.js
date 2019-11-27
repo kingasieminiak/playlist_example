@@ -1,13 +1,14 @@
 const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 const config = {
   mode: 'production',
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'),
-      'process.env.NODE_URL': JSON.stringify('https://api-stg.jam-community.com/'),
-    }),
+    new Dotenv({
+      path: './.prod.env',
+      safe: true,
+    })
   ],
   optimization: {
     minimizer: [

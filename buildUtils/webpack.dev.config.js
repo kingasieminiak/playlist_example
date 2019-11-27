@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 const config = {
   mode: 'development',
@@ -23,10 +24,10 @@ const config = {
     inline: true,
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development'),
-      'process.env.NODE_URL': JSON.stringify('https://api-stg.jam-community.com/'),
-    }),
+    new Dotenv({
+      path: './.env',
+      safe: true,
+    })
   ],
 };
 
