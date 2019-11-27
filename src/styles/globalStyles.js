@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     background-color: ${colors.background};
     overflow-x: hidden;
+    overflow-y: scroll;
   }
 
   button,

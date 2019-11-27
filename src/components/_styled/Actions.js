@@ -49,6 +49,10 @@ export const Action = styled.button`
   cursor: pointer;
   transition: all .3s ease;
 
+  & > * {
+    flex-shrink: 0;
+  }
+
   &:hover {
     color: ${colors.primary};
   }
