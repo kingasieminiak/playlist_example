@@ -1,19 +1,34 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
+
 import { Store } from '../store';
 import { fetchSongsAction } from '../store/actions';
 
+import GlobalStyle from '../styles/globalStyles';
+import { Loader } from './_styled/PageContent';
+import Playlist from './Playlist';
+import Jumbo from './Jumbo';
+import ErrorLabel from './ErrorLabel';
+
 function App() {
   const { state, dispatch } = useContext(Store);
+  const [ page, setPate ] = useState(1);
 
   useEffect(() => {
-    state.songs.length === 0 && fetchSongsAction(dispatch);
-  },[]);
+    fetchSongsAction(dispatch, { page: page });
+  }, [page]);
+
+  const loadSongs = () => setPate(page+1);
 
   return (
-    <ul>
-      {state.songsFeching && <div>feching data...</div>}
-      {!!state.songs.length && state.songs.map((e, i) => <li key={i}>{e.artist_name}</li>)}
-    </ul>
+    <div>
+      <GlobalStyle />
+      <Jumbo />
+
+      {(state.songs.length === 0 && state.songsFeching) && <Loader>loader</Loader>}
+      {!!state.songsFetchingError && <ErrorLabel text={state.songsFetchingError}/>}
+
+      {state.songs.length !== 0 && <Playlist loadSongs={loadSongs} />}
+    </div>
   );
 }
 
