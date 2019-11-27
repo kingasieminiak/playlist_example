@@ -1,15 +1,12 @@
 import axios from 'axios';
 
 class ApiService {
-  constructor(apiURL) {
+  constructor(apiURL, apiKey) {
     this.apiURL = apiURL;
-  }
+    this.apiKey = apiKey;
 
-  setAuthData(token) {
-    this.token = token;
     this.authHeader = {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data',
     };
   }
 
@@ -27,9 +24,12 @@ class ApiService {
     });
   }
 
-  post(url, data = {}, headers, action = null) {
+  post(url, payload = {}, headers, action = null) {
+    const data = new FormData();
+    Object.keys(payload).map(key => data.append(key, payload[key]));
+
     return new Promise((resolve, reject) => {
-      axios.post(`${this.apiURL}${url}`, JSON.stringify(data), { headers: headers || this.authHeader })
+      axios.post(`${this.apiURL}${url}?apikey=${this.apiKey}`, data, { headers: headers || this.authHeader })
         .then((response) => {
           if (action) action(response.data);
           return resolve(response.data);
