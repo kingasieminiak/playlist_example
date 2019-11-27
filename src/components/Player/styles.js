@@ -21,6 +21,11 @@ export const Player = styled.article`
   ${mediaMin(breakpoints.md)} {
     padding: 2rem 1rem;
   }
+
+  ${mediaMin(breakpoints.lg)} {
+    position: sticky;
+    top: 1rem;
+  }
 `;
 
 Player.Thumbnail = styled.figure`
