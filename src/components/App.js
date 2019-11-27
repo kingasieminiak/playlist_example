@@ -4,7 +4,7 @@ import { Store } from '../store';
 import { fetchSongsAction } from '../store/actions';
 
 import GlobalStyle from '../styles/globalStyles';
-import { Loader } from './_styled/PageContent';
+import { LoaderAnimation } from './_styled/PageContent';
 import Playlist from './Playlist';
 import Jumbo from './Jumbo';
 import ErrorLabel from './ErrorLabel';
@@ -24,7 +24,7 @@ function App() {
       <GlobalStyle />
       <Jumbo />
 
-      {(state.songs.length === 0 && state.songsFeching) && <Loader>loader</Loader>}
+      {(state.songs.length === 0 && state.songsFeching) && <LoaderAnimation />}
       {!!state.songsFetchingError && <ErrorLabel text={state.songsFetchingError}/>}
 
       {state.songs.length !== 0 && <Playlist loadSongs={loadSongs} />}

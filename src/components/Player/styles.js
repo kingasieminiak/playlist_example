@@ -1,6 +1,6 @@
 import styled, { keyframes, css } from 'styled-components';
 import { colors, fullsizeCentered } from '../../styles/variables';
-import mediaMin, { breakpoints, container } from '../../styles/mediaQueries';
+import mediaMin, { breakpoints } from '../../styles/mediaQueries';
 
 const rotate = keyframes`
   from { transform: rotate(0deg); }
@@ -13,10 +13,14 @@ export const Player = styled.article`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem 1rem;
+  padding: 0 2rem 2rem;
   text-align: center;
   background-color: ${colors.white};
   border-radius: 4px;
+
+  ${mediaMin(breakpoints.md)} {
+    padding: 2rem 1rem;
+  }
 `;
 
 Player.Thumbnail = styled.figure`

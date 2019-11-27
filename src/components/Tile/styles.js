@@ -62,7 +62,7 @@ Tile.Thumbnail = styled.figure`
 
 Tile.Image = styled.img`
   ${fullsizeCentered};
-  mix-blend-mode: multiply;
+  opacity: .8;
 `;
 
 Tile.TextContainer = styled.div`
@@ -85,6 +85,7 @@ Tile.Subtitle = styled.p`
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: ${colors.textLighten};
 `;
 
 Tile.Actions = styled.div`

@@ -1,7 +1,22 @@
-import styled from 'styled-components';
-import { colors } from '../../styles/variables';
+import React from 'react';
+import styled, { css} from 'styled-components';
+import { colors, wave } from '../../styles/variables';
 import mediaMin, { breakpoints, container } from '../../styles/mediaQueries';
 import { Button } from './Actions';
+
+function createCSS() {
+  let styles = '';
+
+  for (let i = 2; i <= 5; i++) {
+     styles += `
+      span:nth-child(${i}) {
+        animation-delay: ${`0.${i}s`};
+      }
+    `;
+  }
+
+  return css`${styles}`;
+}
 
 export const PageContent = styled.main`
   ${container};
@@ -25,6 +40,7 @@ PageContent.Button = styled(Button)`
 `;
 
 PageContent.Title = styled.h3`
+  margin: 2rem 0;
   font-size: 1.6rem;
 `;
 
@@ -60,12 +76,29 @@ export const ColumnMD = styled(Column)`
   }
 `;
 
-export const Loader = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: ${colors.primary};
-  z-index: 1000;
+export const Wave = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 120px;
+  height: 120px;
+  padding: 2rem;
+  margin: 0 auto;
+
+  span {
+    display: block;
+    width: calc(100% / 5);
+    background: ${colors.accent};
+    border: 1px solid ${colors.background};
+    border-radius: 5px;
+    animation: ${wave} 1.5s infinite ease-in-out;
+  }
+
+  ${createCSS()};
 `;
+
+export const LoaderAnimation = () => (
+  <Wave>
+    <span/><span/><span/><span/><span/>
+  </Wave>
+);
