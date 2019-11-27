@@ -8,20 +8,20 @@ import { setCurrentSong, likeSongAction } from '../../store/actions';
 import { Store } from '../../store';
 
 function Tile({ data, openModal }) {
-  const { state: { currentIndex, likeSuccess }, dispatch } = useContext(Store);
+  const { state, dispatch } = useContext(Store);
   const [animate, setAnimationState] = useState(false);
 
   useEffect(() => {
-    if (likeSuccess === data.id) {
+    if (state.likeSuccess === data.id) {
       setAnimationState(true);
     }
-  }, [likeSuccess]);
+  }, [state.likeSuccess]);
 
   function handleSelectSong(e) {
     e.stopPropagation();
     e.preventDefault();
 
-    if (data.index !== currentIndex) {
+    if (data.index !== state.currentIndex) {
       setCurrentSong(dispatch, { index: data.index });
     }
   }
@@ -37,7 +37,7 @@ function Tile({ data, openModal }) {
   }
 
   return (
-    <S.Tile active={currentIndex === data.index} onClick={handleSelectSong}>
+    <S.Tile active={state.currentIndex === data.index} onClick={handleSelectSong}>
       <S.Tile.Thumbnail>
         <S.Tile.Image src={data.cover_image_path} />
       </S.Tile.Thumbnail>
@@ -52,12 +52,10 @@ function Tile({ data, openModal }) {
           <Action><Comment margin-top="2px" /></Action>
         </S.Tile.Action>
 
-        <S.Tile.ActionHeart
-          onClick={handleLikeSong}
-          animate={animate}
-          onAnimationEnd={() => setAnimationState(false)}
-        >
-          <Action><Heart margin-top="2px" /></Action>
+        <S.Tile.ActionHeart animate={animate} onAnimationEnd={() => setAnimationState(false)}>
+          <Action disabled={state.likeFetching} onClick={handleLikeSong}>
+            <Heart margin-top="2px" />
+          </Action>
         </S.Tile.ActionHeart>
       </S.Tile.Actions>
 

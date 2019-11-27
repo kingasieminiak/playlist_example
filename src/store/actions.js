@@ -31,11 +31,16 @@ export const likeSongAction = async (dispatch, data) => {
   }
 };
 
-export const commentSongAction = async (dispatch, data) => {
+export const commentSongAction = async (dispatch, data, callback = null) => {
   dispatch({ type: SONGS.commentFetching });
 
   try {
     const songs = await apiService.post(endpoints.POST_MESSAGE_BY_ID, data);
+
+    if (callback) {
+      callback();
+    }
+
     return dispatch({ type: SONGS.commentSuccess, payload: data.id });
 
   } catch (error) {

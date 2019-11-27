@@ -8,14 +8,20 @@ import { commentSongAction } from '../../store/actions';
 function Card({ data }) {
   const { state, dispatch } = useContext(Store);
   const [ text, setText ] = useState('');
+  const [ isSubmitted, setSubmit] = useState(false);
 
   function handleTextChange(e) {
     setText(e.target.value);
   }
 
+  function handleSuccess(e) {
+    setText('');
+    setSubmit(true);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-    commentSongAction(dispatch, { id: data.id, message: text, type: 'song' });
+    commentSongAction(dispatch, { id: data.id, message: text, type: 'song' }, handleSuccess);
   }
 
   return (
@@ -23,12 +29,20 @@ function Card({ data }) {
       <S.Card.Title>{data.name}</S.Card.Title>
       <S.Card.Subtitle>{data.artist_name}</S.Card.Subtitle>
 
-      <S.Card.Form>
-        <S.Card.Label htomFor="comment">Type your comment (min. 20 characters)</S.Card.Label>
-        <S.Card.Textarea type="text" onChange={handleTextChange} rows="10" id="comment"></S.Card.Textarea>
+      {!isSubmitted && (
+        <S.Card.Form>
+          <S.Card.Label htomFor="comment">Type your comment (min. 20 characters)</S.Card.Label>
+          <S.Card.Textarea type="text" onChange={handleTextChange} rows="10" id="comment"></S.Card.Textarea>
+          <S.Card.Submit type='submit' onClick={handleSubmit} disabled={text.length < 20}>Post</S.Card.Submit>
+        </S.Card.Form>
+      )}
 
-        <S.Card.Submit type='submit' onClick={handleSubmit} disabled={text.length < 20}>Post</S.Card.Submit>
-      </S.Card.Form>
+      {isSubmitted && (
+        <S.Card.Success>
+          <S.Card.Title>Post successfully sent!</S.Card.Title>
+          <S.Card.Submit onClick={() => setSubmit(false)}>Create new post</S.Card.Submit>
+        </S.Card.Success>
+      )}
     </S.Card>
   );
 }

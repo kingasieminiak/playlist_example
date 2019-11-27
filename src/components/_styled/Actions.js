@@ -59,9 +59,11 @@ export const Action = styled.button`
 
   &:disabled {
     color: ${colors.border}
+    opacity: .2;
+    cursor: not-allowed;
 
     &:hover {
-    color: ${colors.border};
+      color: ${colors.border};
     }
   }
  `;

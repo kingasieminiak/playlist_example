@@ -49,3 +49,7 @@ Card.Textarea = styled.textarea`
 Card.Submit = styled(Button)`
   margin-top: 1rem;
 `;
+
+Card.Success = styled.div`
+  text-align: center;
+`;
